@@ -39,25 +39,31 @@ class LandingPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Image at the top that redirects when clicked
-            GestureDetector(
-              onTap: _launchURL,
-              child: Image.network(
-                'https://i.postimg.cc/kXtKysW5/freepik-a-popup-window-with-the-question-are-you-18-or-old-72225.png',
-                width: double.infinity,
-                fit: BoxFit.contain,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    height: 400,
-                    color: Colors.grey[900],
-                    child: const Center(
-                      child: Text(
-                        'Image not available',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  );
-                },
+            // Image at the top that redirects when clicked - constrained to 60% of screen width
+            Center(
+              child: GestureDetector(
+                onTap: _launchURL,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.6,
+                  ),
+                  child: Image.network(
+                    'https://i.postimg.cc/kXtKysW5/freepik-a-popup-window-with-the-question-are-you-18-or-old-72225.png',
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 300,
+                        color: Colors.grey[900],
+                        child: const Center(
+                          child: Text(
+                            'Image not available',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ),
             ),
             
